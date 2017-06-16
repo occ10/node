@@ -1,0 +1,1404 @@
+# this is an example of the Uber API
+# as a demonstration of an API spec in YAML
+swagger: '2.0'
+info:
+  title: Practica ADI
+  description: Desarrollo de una api rest con express
+  version: "1.0.0"
+# the domain of the service
+host: api.uber.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /v1
+produces:
+  - application/json
+paths:
+
+            
+
+  /api/users:
+    get:
+      summary: Usuarios
+      description: |
+        Devuelve todos los usuarios del sistema.
+
+
+      responses:
+        200:
+          description: array de usuarios
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Usuario'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+            
+  /api/user/car:
+    get:
+      summary: Coches en la base de datos
+      description: |
+        Los coches de los usuarios en la base de datos.
+      responses:
+        200:
+          description: array de coches
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+
+
+  /api/user/house:
+    get:
+      summary: Casas en la base de datos
+      description: |
+        Las casas de los usuarios en la base de datos.
+      responses:
+        200:
+          description: array de casas
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+
+            
+  /api/user/opinions/coche:
+    get:
+      summary: Opiniones sobre los coches
+      description: las opiniones que ponen los usuarios sobre los coches.
+
+
+      responses:
+        200:
+          description: array de coches
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Opinion_coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+  /api/user/opinions/casa:
+    get:
+      summary: Opiniones sobre las casas
+      description: las opiniones que ponen los usuarios sobre las casas.
+
+      responses:
+        200:
+          description: array de opiniones
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Opinion_casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+            
+  /api/user:
+    post:
+      summary: Usuario
+      description: |
+        inserta un usuario en la base de datos.
+
+      parameters:
+        - name: nif
+          in: query
+          description: nif del usuario.
+          required: true
+          type: string
+        - name: name
+          in: query
+          description: nombre del usuario.
+          
+          type: string          
+
+        - name: age
+          in: query
+          description: edad del usuario en el sistema.
+  
+          type: number
+          format: double
+
+      responses:
+        200:
+          description: objeto usurio
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Usuario'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+  /api/user/nif/:nif:
+    get:
+      summary: Usuario
+      description: |
+        Devuelve un usuario dado con su nif.
+
+      parameters:
+        - name: nif
+          in: query
+          description: nif del usuario en el sistema.
+          required: true
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: objeto de un usuario
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Usuario'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+            
+    delete:
+      summary: Usuario
+      description: |
+        eleminar un usuario en la base de datos.
+
+      parameters:
+        - name: nif
+          in: query
+          description: nif del usuario en el sistema.
+          required: true
+          type: integer
+          format: int32
+        
+
+      responses:
+        200:
+          description: objeto jsong
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Info'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'             
+            
+    put:
+      summary: Usuario
+      description: |
+        inserta un usuario en la base de datos.
+
+      parameters:
+        - name: nif
+          in: query
+          description: nif del usuario.
+          required: true
+          type: string
+        - name: name
+          in: query
+          description: nombre del usuario.
+          
+          type: string          
+
+        - name: age
+          in: query
+          description: edad del usuario en el sistema.
+  
+          type: number
+          format: double
+
+      responses:
+        200:
+          description: objeto de un usuario
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Usuario'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+            
+            
+            
+  /api/user/id/:id:
+    get:
+      summary: Usuario
+      description: |
+        Devuelve un usuario dado con su id.
+
+      parameters:
+        - name: _id
+          in: query
+          description: id del usuario en el sistema.
+          required: true
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: objeto de un usuario
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Usuario'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+  
+    put:
+      summary: Usuario
+      description: |
+        actualiza un usuario en la base de datos.
+
+      parameters:
+        - name: id
+          in: query
+          description: id del usuario.
+          required: true
+          type: string
+        - name: name
+          in: query
+          description: nombre del usuario.
+          
+          type: string          
+
+        - name: age
+          in: query
+          description: edad del usuario en el sistema.
+  
+          type: number
+          format: double
+
+      responses:
+        200:
+          description: objeto de un usuario
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Usuario'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+    delete:
+      summary: Usuario
+      description: |
+        eleminar un usuario en la base de datos.
+
+      parameters:
+        - name: _id
+          in: query
+          description: id del usuario en el sistema.
+          required: true
+          type: integer
+          format: int32
+        
+
+      responses:
+        200:
+          description: objeto jsong
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Info'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+            
+            
+  /api/collection/user/:id:
+    get:
+      summary: Usuarios en la base de datos con paginacion
+      description: |
+        los usuarios en la base de datos con paginacion siendo el id el empiezo de los registros, por ejemplo si se pone id= 2 empieza a demostrar la informacion a partir de la posicion 2.
+
+
+      responses:
+        200:
+          description: array de usuarios
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Usuario'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'          
+            
+            
+            
+  /api/user/houses/:id:
+    get:
+      summary: Casas de Usuario
+      description: |
+        Devuelve las casas de un usuario dado con su id.
+
+      parameters:
+        - name: _id
+          in: query
+          description: id del usuario en el sistema.
+          required: true
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: objeto de un usuario
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/usuario_casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'     
+    
+  
+         
+         
+           
+            
+  /api/house:
+    post:
+      summary: Post casa
+      description: |
+        inserta una casa en la base de datos.
+
+      parameters:
+        - name: _creator
+          in: query
+          description: id del usuario que publica el anoncio.
+          required: true
+          type: string
+        - name: zona
+          in: query
+          description: direccion de la casa.
+          
+          type: string          
+
+        - name: precio
+          in: query
+          description: precio del alquiler.
+  
+          type: number
+          format: double
+          
+        - name: telefono
+          in: query
+          description: direccion de la casa.
+          
+          type: string  
+        - name: observacion
+          in: query
+          description: observacion del que publica la casa .
+          type: string         
+
+      responses:
+        200:
+          description: objeto de una casa
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/usuario_casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'             
+            
+            
+
+             
+                        
+  /api/house/:id  :
+    put:
+      summary: Put casa
+      description: |
+        actualiza una casa en la base de datos.
+
+      parameters:
+        - name: _creator
+          in: query
+          description: id del usuario que publica el anoncio.
+          required: true
+          type: string
+        - name: zona
+          in: query
+          description: direccion de la casa.
+          required: true
+          type: string          
+
+        - name: precio
+          in: query
+          description: precio del alquiler.
+          required: true
+  
+          type: number
+          format: double
+          
+        - name: telefono
+          in: query
+          description: direccion de la casa.
+          required: true
+          type: string  
+        - name: observacion
+          in: query
+          description: observacion del que publica la casa .
+          type: string         
+
+      responses:
+        200:
+          description: objeto jsong con informacion de la operacion put
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/usuario_casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+    delete:
+      summary: borrar casa
+      description: |
+        borrar casa de la base de datos.
+
+      parameters:
+        - name: _id
+          in: query
+          description: id de la casa en el sistema.
+          required: true
+          type: integer
+          format: int32
+        
+
+      responses:
+        200:
+          description: objeto jsong que defiene el resultado de la operacion delete
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Info'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+    get:
+      summary: Casa 
+      description: |
+        Devuelve la casa con un un id dado.
+
+      parameters:
+        - name: _id
+          in: query
+          description: id de la casa en el sistema.
+          required: true
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: objeto casa
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/usuario_casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+           
+  /api/user/house/:tel :
+    get:
+      summary: nombre usuario
+      description: |
+        se pasa como parametro un telefono que esta en la base de datos de una casa y devuelve el nombre del usuario que publica esta casa.
+
+      parameters:
+        - name: tel
+          in: query
+          description: telefono de la casa en el sistema.
+          required: true
+          type: string
+
+
+      responses:
+        200:
+          description: nombre del usuario que publica la casa
+          schema:
+            type: string
+            items:
+              $ref: '#/definitions/Cadena'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
+            
+  /api/user/car/matricula/:matricula :
+    get:
+      summary: nombre usuario
+      description: |
+        se pasa como parametro la matricula de un coche y devuelve el nombre del dueño del coche.
+
+      parameters:
+        - name: matricula
+          in: query
+          description: matricula del coche en el sistema.
+          required: true
+          type: string
+
+
+      responses:
+        200:
+          description: nombre del usuario que publica el coche
+          schema:
+            type: string
+            items:
+              $ref: '#/definitions/Cadena'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'        
+            
+            
+  /api/collection/house/:id:
+    get:
+      summary: Casas en la base de datos con paginacion
+      description: |
+        Las casas de los usuarios en la base de datos con paginacion siendo el id el indice.
+
+      parameters:
+        - name: _id
+          in: query
+          description: indice.
+          required: true          
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: array de coches
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+            
+            
+  /api/user/car/:id:
+    get:
+      summary: Coche 
+      description: |
+        devuelve los coches de un usuario pasando su id en la base de datos.
+
+      parameters:
+        - name: _id
+          in: query
+          description: identificador del usuario en la tabla coche.
+          required: true          
+          type: integer
+          format: int32
+
+
+      responses:
+        200:
+          description: array de coches
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+            
+          
+           
+            
+  /api/car:
+    post:
+      summary: Post un coche 
+      description: |
+        Insertar un coche en la base de datos
+
+      parameters:
+
+        - name: _creator
+          in: query
+          required: true   
+          description: id del usuario del dueño del coche.
+          type: string          
+        - name: matricula
+          in: query
+          required: true   
+          description: matricula del coche.
+
+          type: string
+
+        - name: modelo
+          in: query
+          description: modelo del coche.
+
+          type: string
+
+        - name: coclor
+          in: query
+          description: color del coche.
+
+          type: string
+          
+        - name: precio
+          in: query
+          required: true   
+          description: precio del coche.
+
+          type: number
+          format: double
+
+
+      responses:
+        200:
+          description: array de coches
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+
+  /api/car/id/:id:
+    get:
+      summary: Coche 
+      description: |
+        Devolver un coche pasando su id.
+
+      parameters:
+        - name: id
+          in: query
+          description: identificador del coche.
+          required: true          
+          type: integer
+          format: int32
+
+
+
+      responses:
+        200:
+          description: objeto coche
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+    put:
+      summary: Put un coche 
+      description: |
+        actualizar un coche en la base de datos
+
+      parameters:
+        - name: id
+          in: query
+          description: identificador del coche en la base de datos.
+          required: true          
+          type: integer
+          format: int32
+        - name: matricula
+          in: query
+          description: matricula del coche.
+
+          type: string
+
+        - name: modelo
+          in: query
+          description: modelo del coche.
+
+          type: string
+
+        - name: coclor
+          in: query
+          description: color del coche.
+
+          type: string
+          
+        - name: precio
+          in: query
+          description: precio del coche.
+
+          type: number
+          format: double
+
+
+      responses:
+        200:
+          description: array de coches
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+    delete:
+      summary: Delete car
+      description: |
+        Borrar un coche pasando su id.
+
+      parameters:
+        - name: id
+          in: query
+          description: identificador del coche.
+          required: true          
+          type: integer
+          format: int32
+
+
+
+      responses:
+        200:
+          description: objeto jong 
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
+             
+          
+
+  /api/collection/car/:id  :
+    get:
+      summary: Coche 
+      description: |
+        Devolver una coleccion de coches.
+
+      parameters:
+        - name: _id
+          in: query
+          description: devolver cantidad de coches apartir de una posicion dada por el parametro id.
+        
+          type: integer
+          format: int32
+
+
+      responses:
+        200:
+          description: objetos de coche
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+ 
+
+            
+            
+            
+            
+  /api/user/opinion/coche/:id:
+    get:
+      summary: Get opiniones user 
+      description: |
+        devuelve las opiniones de un usuario dado por su id.
+
+      parameters:
+        - name: _id
+          in: query
+          description: identificador del usuario en la base de datos.
+          required: true          
+          type: integer
+          format: int32
+
+
+
+      responses:
+        200:
+          description: array de opiniones
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Opinion_coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+            
+   
+   
+  /api/user/opinion/coche/nif/:id:
+    get:
+      summary: Get nif user 
+      description: |
+        devuelve el nif de un usuario pasando el id de la opinion.
+
+      parameters:
+        - name: _id
+          in: query
+          description: identificador de la opinion en la base de datos.
+          required: true          
+          type: integer
+          format: int32
+
+
+
+      responses:
+        200:
+          description: cadena string
+          schema:
+            type: string
+            items:
+              $ref: '#/definitions/Cadena'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+            
+            
+
+
+
+  /api/collection/opinion/coche/:id :
+    get:
+      summary: Opiniones sobre los coches
+      description: las opiniones que ponen los usuarios sobre los coches.
+      parameters:
+        - name: _id
+          in: query
+          description: la posicion del registro del cual parte para devolver una cantidad de regsitros limitada con la funcion limit().
+          required: true
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: An array of products
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Opinion_coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+          
+            
+           
+
+   
+  /api/user/opinion/coche:
+    post:
+      summary: Post un coche 
+      description: |
+        Insertar un coche en la base de datos
+
+      parameters:
+
+        - name: _user
+          in: query
+          description: id del usuario en la base de datos.
+          type: integer
+          format: int32
+
+        - name: _car
+          in: query
+          description: id del coche en la base de datos.
+          type: integer
+          format: int32
+
+        - name: opinion
+          in: query
+          description: opinion sobre un coche.
+
+          type: string
+          
+ 
+
+      responses:
+        200:
+          description: jsong array
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Opinion_coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'   
+            
+           
+  /api/opinion/coche/:id :
+    put:
+      summary: Put un coche 
+      description: |
+        Actualizar opinion de un coche en la base de datos
+
+      parameters:
+        - name: _id
+          in: query
+          description: identificador de la opinion en la base de datos.
+          required: true          
+          type: integer
+          format: int32
+        - name: _user
+          in: query
+          description: id del usuario en la base de datos.
+          type: integer
+          format: int32
+
+        - name: _car
+          in: query
+          description: id del coche en la base de datos.
+          type: integer
+          format: int32
+
+        - name: opinion
+          in: query
+          description: opinion sobre un coche.
+
+          type: string
+          
+
+      responses:
+        200:
+          description: jsong array
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Opinion_coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'             
+            
+            
+
+    get:
+      summary: Opinion sobre un coche
+      description: encuentra una opinion pasanda por un id.
+      parameters:
+        - name: _id
+          in: query
+          description: el id de la opinion del coche en la base de datos.
+          required: true
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: jsong object
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Opinion_coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+    delete:
+      summary: Put un coche 
+      description: |
+        Borrar opinion de un coche en la base de datos
+
+      parameters:
+        - name: _id
+          in: query
+          description: identificador de la opinion en la base de datos.
+          required: true          
+          type: integer
+          format: int32
+
+          
+ 
+
+
+      responses:
+        200:
+          description: informacion del borrado
+          schema:
+            type: string
+            items:
+              $ref: '#/definitions/Info'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error' 
+            
+            
+  /api/user/opinion/casa/:id:
+    get:
+      summary: Opiniones sobre los coches
+      description: las opiniones de un usuario pasando su id.
+      parameters:
+        - name: _id
+          in: query
+          description: identificador del usuario en la base de datos.
+          required: true          
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: An array of products
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Opinion_casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'            
+  
+
+
+  /api/collection/opinion/casa/:id:
+    get:
+      summary: Opiniones sobre los coches
+      description: las opiniones con paginacion.
+      parameters:
+        - name: _id
+          in: query
+          description: id desde el cual parte la consulta sobre los registros, es decir si le pasamos 0 empieza por el registro 0 .
+          required: true          
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: Array de las opiniones
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Opinion_casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+            
+            
+  /api/opinion/casa/:id:
+    get:
+      summary: Opinion
+      description: devolver una opinion pasando su id.
+      parameters:
+        - name: _id
+          in: query
+          description: id de la opinion en la base de datos .
+          required: true          
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: objeto opinion
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Opinion_coches'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'    
+    put:
+      summary: Post opinion sobre un coche
+      description: |
+        Actualizar opinion sobre una casa en la base de datos
+
+      parameters:
+        - name: _id
+          in: query
+          description: identificador de la opinion en la base de datos.
+          required: true          
+          type: integer
+          format: int32
+        - name: _user
+          in: query
+          description: id del usuario en la base de datos.
+          type: integer
+          format: int32
+
+        - name: _car
+          in: query
+          description: id del coche en la base de datos.
+          type: integer
+          format: int32
+
+        - name: opinion
+          in: query
+          description: opinion sobre un coche.
+
+          type: string
+          
+ 
+
+      responses:
+        200:
+          description: jsong array
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/InfoPut'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+            
+            
+    delete:
+      summary: delete opinion sobre una casa
+      description: |
+        Borrar opinion sobre una casa en la base de datos
+
+      parameters:
+        - name: _id
+          in: query
+          description: identificador de la opinion en la base de datos.
+          required: true          
+          type: integer
+          format: int32
+
+      responses:
+        200:
+          description: informacion del borrado
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Info'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'           
+  /api/opinion/casa :
+    post:
+      summary: Post opinion sobre un coche
+      description: |
+        Insertar opinion sobre un  coche en la base de datos
+
+      parameters:
+        - name: _user
+          in: query
+          description: id del usuario en la base de datos.
+          type: integer
+          format: int32
+
+        - name: _car
+          in: query
+          description: id de la casa en la base de datos.
+          type: integer
+          format: int32
+
+        - name: opinion
+          in: query
+          description: opinion sobre un coche.
+
+          type: string
+          
+
+      responses:
+        200:
+          description: jsong array
+          schema:
+            type: object
+            items:
+              $ref: '#/definitions/Opinion_casas'
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'  
+            
+  
+            
+
+            
+definitions:
+  Usuario:
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: unico identificador de los usuarios.
+      nif:
+        type: string
+        description: nif del usuario.
+      name:
+        type: string
+        description: nombre del usuario.
+      age:
+        type: integer
+        description: edad del usuario.
+
+
+
+  Coches:
+    type: object
+    
+           
+    properties:
+      _id:
+        type: integer
+        description: unico identificador.
+      _creator:
+        type: integer
+        description: unico identificador.      
+      matricula:
+        type: string
+        description: matricula del coche
+      modelo:
+        type: string
+        description: modelo del coche.
+      color:
+        type: string
+        description: Formatted string of estimate in local currency of the start location. Estimate cocolor del coche.
+      precio:
+        type: integer
+        description: precio del coche.
+
+        
+  Casas:
+    type: object
+    
+           
+    properties:
+      _id:
+        type: integer
+        description: unico identificador de casas.
+      _creator:
+        type: integer
+        description: objeto del que pone la casa en la publicidad
+      zona:
+        type: string
+        description: direccion de la casa.
+      precio:
+        type: integer
+        description: precio del alquiler de la casa para compartir.
+      telefono:
+        type: string
+        description: tele de contacto.
+      observacion:
+        type: string
+        description: observacion sobre la casa.        
+
+        
+
+  Opinion_casas:
+  
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: id de la opinion.
+      _user:
+        type: object
+        description: usuario que ha puesto la opinion.
+      _car:
+        type: object
+        description: el coche sobre el cual se ha opinado
+      opinion:
+        type: string
+        description: la opinion del usuario sobre el coche.
+        
+  Opinion_coches:
+  
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: id de la opinion.
+      _user:
+        type: integer
+        description: usuario que ha puesto la opinion.
+      _car:
+        type: integer
+        description: el coche sobre el cual se ha opinado
+      opinion:
+        type: string
+        description: la opinion del usuario sobre el coche.
+        
+  Info:
+  
+    type: object
+    properties:
+      _info:
+        type: string
+        description: informacion de la operacion borrado.
+  InfoPut:
+  
+    type: object
+    properties:
+      _info:
+        type: string
+        description: informacion de la operacion actualizar.
+  Cadena:
+  
+    type: string
+    properties:
+      _info:
+        type: string
+        description: informacion del usuario.
+
+  usuario_casas:
+  
+    type: object
+    properties:
+      _id:
+        type: integer
+        description: id de la opinion.
+      _creator:
+        type: object
+        description: usuario que tiene la casa.
+      zona:
+        type: string
+        description: direccion de la casa
+      precio:
+        type: integer
+        description: precio del alquiler
+      telefono:
+        type: string
+        description: numero tele de contacto
+      observacion:
+        type: string
+        description: detalles de la casa        
+        
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
